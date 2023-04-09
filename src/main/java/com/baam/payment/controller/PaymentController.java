@@ -1,6 +1,7 @@
 package com.baam.payment.controller;
 
 
+import com.baam.payment.aop.Timer;
 import com.baam.payment.domain.entity.Payment;
 import com.baam.payment.request.PaymentRequestDTO;
 import com.baam.payment.service.PaymentService;
@@ -18,8 +19,11 @@ public class PaymentController {
 
 
     @GetMapping("/health")
+    @Timer
     public String health()
     {
+
+        System.out.printf("heelo");
         return "server run";
     }
 
