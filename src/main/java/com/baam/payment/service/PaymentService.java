@@ -10,7 +10,7 @@ public class PaymentService {
 
     public Payment payment(PaymentRequestDTO paymentRequestDTO)
     {
-        return new Payment(paymentRequestDTO);
+        return new Payment();
     }
 
 
