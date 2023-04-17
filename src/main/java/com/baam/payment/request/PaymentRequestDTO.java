@@ -27,7 +27,7 @@ public class PaymentRequestDTO {
     {
         private String productName;
         private int price;
-        
+
         @Builder
         public Product(String productName, int price) {
             this.productName = productName;
