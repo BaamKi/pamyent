@@ -1,28 +1,64 @@
 package com.baam.payment.request;
 
+import com.baam.payment.domain.entity.Payment;
 import jakarta.validation.Valid;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
+@Getter
+@Valid
+@NoArgsConstructor
 public class PaymentRequestDTO {
 
-    @Getter
-    @Valid
-    public static class Buyer
-    {
-        private String productName;
-        private int price;
+    private Buyer buyer;
+    private Product product;
 
-        @Builder
-        public Buyer(String productName, int price) {
-            this.productName = productName;
-            this.price = price;
-        }
+    @Builder
+    public PaymentRequestDTO(Buyer buyer, Product product) {
+        this.buyer = buyer;
+        this.product = product;
+    }
+
+    public Payment toEntity(PaymentRequestDTO paymentRequestDTO)
+    {
+        Payment payment = Payment.builder().
+                productName(paymentRequestDTO.getProduct().productName).
+                price(paymentRequestDTO.getProduct().price).
+                buyerName(paymentRequestDTO.getBuyer().buyerName).
+                email(paymentRequestDTO.getBuyer().email).
+                phoneNumber(paymentRequestDTO.getBuyer().phoneNumber).build();
+        return payment;
     }
 
 
+
+
+
+
     @Getter
     @Valid
+    @NoArgsConstructor
+    public static class Buyer
+    {
+        private String buyerName;
+        private String email;
+        private String phoneNumber;
+
+        @Builder
+        public Buyer(String buyerName, String email, String phoneNumber) {
+            this.buyerName = buyerName;
+            this.email = email;
+            this.phoneNumber = phoneNumber;
+        }
+
+
+    }
+
+    @Getter
+    @Valid
+    @NoArgsConstructor
     public static class Product
     {
         private String productName;
@@ -34,6 +70,5 @@ public class PaymentRequestDTO {
             this.price = price;
         }
     }
-
 
 }

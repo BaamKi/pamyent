@@ -10,7 +10,8 @@ public class PaymentService {
 
     public Payment payment(PaymentRequestDTO paymentRequestDTO)
     {
-        return new Payment();
+        Payment payment = paymentRequestDTO.toEntity(paymentRequestDTO);
+        return payment;
     }
 
 

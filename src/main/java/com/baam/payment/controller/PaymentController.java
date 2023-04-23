@@ -32,9 +32,11 @@ public class PaymentController {
 
     @PostMapping("/payment")
     @Timer
-    public Payment payment(@RequestBody PaymentRequestDTO paymentRequestDTO)
+    public String payment(@RequestBody PaymentRequestDTO paymentRequestDTO)
     {
-        return paymentService.payment(paymentRequestDTO);
+        logger.info(paymentService.payment(paymentRequestDTO).toString());
+        paymentService.payment(paymentRequestDTO);
+        return "hello";
     }
 
 
