@@ -5,6 +5,7 @@ import com.baam.payment.aop.Timer;
 import com.baam.payment.domain.entity.Payment;
 import com.baam.payment.request.PaymentRequestDTO;
 import com.baam.payment.service.PaymentService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +21,17 @@ public class PaymentController {
 
     @GetMapping("/health")
     @Timer
-    public String health()
+    public String health(HttpServletRequest request)
     {
-        logger.info("info ---- 입니다.");
+        logger.info("ip 주소는 {} 입니다",request.getRemoteAddr());
+        return "server run";
+    }
+
+    @GetMapping("/check")
+    @Timer
+    public String check()
+    {
+        logger.info("요청이 왔습니다.");
         return "server run";
     }
 
